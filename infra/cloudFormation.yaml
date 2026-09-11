@@ -1,0 +1,44 @@
+AWSTemplateFormatVersion: "2010-09-09"
+
+Description: TeamBoard - Infraestructura AWS
+
+Parameters:
+
+  Environment:
+    Type: String
+    Default: test
+
+  AmiId:
+    Type: AWS::EC2::Image::Id
+    Description: AMI de Amazon Linux para la instancia EC2
+
+  InstanceType:
+    Type: String
+    Default: t3.micro
+
+Resources:
+
+  FrontendBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub "teamboard-frontend-${AWS::AccountId}-${AWS::Region}-${Environment}"
+
+  BackendInstance:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: !Ref AmiId
+      InstanceType: !Ref InstanceType
+
+      Tags:
+        - Key: Name
+          Value: TeamBoard-Backend
+
+Outputs:
+
+  FrontendBucketName:
+    Description: Bucket S3 del frontend
+    Value: !Ref FrontendBucket
+
+  BackendInstanceId:
+    Description: ID de la instancia EC2
+    Value: !Ref BackendInstance

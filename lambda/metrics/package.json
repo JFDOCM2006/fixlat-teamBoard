@@ -1,0 +1,12 @@
+{
+  "name": "teamboard-metrics",
+  "version": "1.0.0",
+  "description": "Lambda de métricas para TeamBoard",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"No tests yet\""
+  },
+  "dependencies": {
+    "pg": "^8.23.0"
+  }
+}
